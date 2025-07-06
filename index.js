@@ -1,34 +1,33 @@
 const { ExpressPeerServer } = require("peer");
 const express = require("express");
-const https = require("https");
-const fs = require("fs");
+// const https = require("https");
+const http = require("http");
+
+// const fs = require("fs");
 
 const app = express();
 
-// Load SSL certs (optional for HTTPS — skip for HTTP-only testing)
+// ✅ Create HTTPS server with certs
 // const server = https.createServer({
-//   key: fs.readFileSync("/etc/letsencrypt/live/yourdomain.com/privkey.pem"),
-//   cert: fs.readFileSync("/etc/letsencrypt/live/yourdomain.com/fullchain.pem"),
+//   key: fs.readFileSync("/etc/letsencrypt/live/21cm.store/privkey.pem"),
+//   cert: fs.readFileSync("/etc/letsencrypt/live/21cm.store/fullchain.pem"),
 // }, app);
 
-// OR for plain HTTP (remove if using HTTPS above)
-const http = require('http');
-const server = http.createServer(app);
+const server = http.createServer()
 
+// ✅ Set up PeerJS
 const peerServer = ExpressPeerServer(server, {
   debug: true,
-  path: "/myapp",
+  path: "/myapp", // Not /myapp (keep this consistent)
 });
 
-app.get('/', (req,res) => {
-    res.json({
-        status: "ok"
-    })
-})
+app.get('/', (req, res) => {
+  res.json({ status: "ok" });
+});
 
 app.use("/peerjs", peerServer);
 
-// Start on port 443 (for HTTPS) or 3000 (for HTTP testing)
-server.listen(443, () => {
-  console.log("PeerJS server running on port 443");
+// ✅ Run HTTPS server on port 443
+server.listen(3000, () => {
+  console.log("PeerJS server running on port 3000");
 });
