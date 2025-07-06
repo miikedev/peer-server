@@ -13,7 +13,7 @@ const server = https.createServer({
 
 const peerServer = ExpressPeerServer(server, {
   debug: true,
-  path: "/myapp",
+  path: "/peerjs",
 });
 
 app.get('/', (req,res) => {
