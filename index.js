@@ -5,15 +5,11 @@ const fs = require("fs");
 
 const app = express();
 
-// Load SSL certs (optional for HTTPS — skip for HTTP-only testing)
-// const server = https.createServer({
-//   key: fs.readFileSync("/etc/letsencrypt/live/yourdomain.com/privkey.pem"),
-//   cert: fs.readFileSync("/etc/letsencrypt/live/yourdomain.com/fullchain.pem"),
-// }, app);
 
-// OR for plain HTTP (remove if using HTTPS above)
-const http = require('http');
-const server = http.createServer(app);
+const server = https.createServer({
+  key: fs.readFileSync("/etc/letsencrypt/live/yourdomain.com/privkey.pem"),
+  cert: fs.readFileSync("/etc/letsencrypt/live/yourdomain.com/fullchain.pem"),
+}, app);
 
 const peerServer = ExpressPeerServer(server, {
   debug: true,
