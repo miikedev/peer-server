@@ -7,8 +7,8 @@ const app = express();
 
 
 const server = https.createServer({
-  key: fs.readFileSync("/etc/letsencrypt/live/yourdomain.com/privkey.pem"),
-  cert: fs.readFileSync("/etc/letsencrypt/live/yourdomain.com/fullchain.pem"),
+  key: fs.readFileSync("/etc/letsencrypt/live/21cm.store/privkey.pem"),
+  cert: fs.readFileSync("/etc/letsencrypt/live/21cm.store/fullchain.pem"),
 }, app);
 
 const peerServer = ExpressPeerServer(server, {
