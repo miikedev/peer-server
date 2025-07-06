@@ -29,6 +29,7 @@ app.get('/', (req,res) => {
 app.use("/peerjs", peerServer);
 
 // Start on port 443 (for HTTPS) or 3000 (for HTTP testing)
-server.listen(443, () => {
-  console.log("PeerJS server running on port 443");
+const port = process.env.PORT || 3000;
+server.listen(port, () => {
+  console.log(`PeerJS server running on port ${port}`);
 });
